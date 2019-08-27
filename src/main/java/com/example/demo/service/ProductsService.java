@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.model.Customer;
 import com.example.demo.model.Product;
 
 public interface ProductsService {
@@ -29,7 +30,7 @@ public interface ProductsService {
 	Optional<Product> findProductById(int id);
 
 
-	void createProduct(Product product2);
+	void createProduct(Product product2 , Customer customer);
 
 	
 

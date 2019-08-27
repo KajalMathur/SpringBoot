@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.Customer;
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductServiceimpl;
 
@@ -41,9 +42,15 @@ public class WebController {
 	   // POST 
 	  
 	      @RequestMapping(value = "/products", method = RequestMethod.POST)
-	      public ResponseEntity<Object> createProduct(@RequestBody Product product) {	
+	      public ResponseEntity<Object> createProduct(@RequestBody Product product , Customer customer) {	
 	    	  log.debug("Inside HTTP post method");
-	    	  ps.createProduct(product);
+	    	  System.out.print("Customer class ====="+product.getCus());
+	    		System.out.print("Customer====="+product.getCus() + customer.getAddress() + customer.getCustid() + customer.getCustName());
+	    		customer.setCustid(product.getCus().getCustid());
+	    		customer.setAddress(product.getCus().getAddress());
+	    		customer.setCustName(product.getCus().getCustName());
+	    		product.setCus(customer);
+	    	  ps.createProduct(product , customer);
 	         return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
 	      }
 	      

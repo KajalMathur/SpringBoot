@@ -7,7 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dao.Customerdao;
 import com.example.demo.dao.Productdao;
+import com.example.demo.model.Customer;
 import com.example.demo.model.Product;
 
 @Service
@@ -16,9 +18,12 @@ public class ProductServiceimpl implements ProductsService {
 	@Autowired
 	Productdao product;
 	
-	@Override
-	public void createProduct(Product product2) {
-		// TODO Auto-generated method stub		
+	@Autowired
+	Customerdao customer;
+	
+	public void createProduct(Product product2 , Customer customer1) {
+		// TODO Auto-generated method stub	
+	    customer.save(customer1);
 		product.save(product2);
 		
 	}
@@ -67,6 +72,8 @@ public class ProductServiceimpl implements ProductsService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 	
 
 }

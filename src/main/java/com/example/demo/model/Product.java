@@ -44,12 +44,29 @@ public class Product {
 	
 	
 	
+
+	@NonNull
+	Map<String , String> test;
+
+	@NonNull
+	Map<String , String> demo ;
 	
-	Map test;
-	Map demo ;
-	
-	@Autowired @DBRef
+	@DBRef @JsonProperty("cus")
 	Customer cus;
+	
+	/* Product(int id , String name , String color , String size , List<String> othersize , Map<String , String> test , Map<String,String> demo , Customer cus)
+	{
+	 this.id=id ;
+	 this.name=name ;
+	 this.color=color;
+	 this.size=size ;
+	 this.othersize = othersize ; 
+	 this.test=test ; 
+	 this.demo=demo;
+	 this.cus=cus;
+	}  */
+	
+	
 	
 }
 
