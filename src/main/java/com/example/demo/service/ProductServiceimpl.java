@@ -23,7 +23,7 @@ public class ProductServiceimpl implements ProductsService {
 	
 	public void createProduct(Product product2 , Customer customer1) {
 		// TODO Auto-generated method stub	
-	    customer.save(customer1);
+	   customer.save(customer1);
 		product.save(product2);
 		
 	}
