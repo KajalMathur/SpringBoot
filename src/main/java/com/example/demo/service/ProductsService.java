@@ -30,7 +30,7 @@ public interface ProductsService {
 	Optional<Product> findProductById(int id);
 
 
-	void createProduct(Product product2 , Customer customer);
+	void createProduct(Product product2);
 
 	
 

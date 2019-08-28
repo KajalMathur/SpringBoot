@@ -35,13 +35,8 @@ public class WebController {
 	   // POST 
 	  
 	      @RequestMapping(value = "/products", method = RequestMethod.POST)
-	      public ResponseEntity<Object> createProduct(@RequestBody Product product , Customer customer) {	
-	    	 
-	    	  	customer.setCustid(product.getCus().getCustid());
-	    		customer.setAddress(product.getCus().getAddress());
-	    		customer.setCustName(product.getCus().getCustName());
-	    		product.setCus(customer);
-	    	  ps.createProduct(product , customer);
+	      public ResponseEntity<Object> createProduct(@RequestBody Product product) {	
+	    	  ps.createProduct(product);
 	         return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
 	      }
 	      

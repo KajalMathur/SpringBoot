@@ -1,10 +1,7 @@
  package com.example.demo.model;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NonNull;
@@ -44,20 +41,9 @@ public class Product {
 	@NonNull
 	Map<String , String> demo ;
 	
-	@DBRef
 	Customer cus;
 	
-	/* Product(int id , String name , String color , String size , List<String> othersize , Map<String , String> test , Map<String,String> demo , Customer cus)
-	{
-	 this.id=id ;
-	 this.name=name ;
-	 this.color=color;
-	 this.size=size ;
-	 this.othersize = othersize ; 
-	 this.test=test ; 
-	 this.demo=demo;
-	 this.cus=cus;
-	}  */
+	
 	
 	
 	
