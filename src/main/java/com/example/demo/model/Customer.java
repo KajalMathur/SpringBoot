@@ -7,25 +7,18 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
-@Getter 
+@Getter
 @Setter
 @Document
 public class Customer {
 
-	
 	@Id
 	int custid;
-	
-	
+
 	@NonNull
-	 String custName;
-	
-	 @NonNull 
-	 String address;
-	 
-	/* Customer(String custName , String address){
-		 this.custName=custName;
-		 this.address=address;
-		 
-	 }  */
+	String custName;
+
+	@NonNull
+	String address;
+
 }
