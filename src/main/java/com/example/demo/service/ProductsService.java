@@ -1,14 +1,11 @@
 package com.example.demo.service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.model.Product;
 
 public interface ProductsService {
-
-	public void createProduct(List<Product> emp);
 
 	public Collection<Product> getAllProducts();
 
@@ -21,7 +18,5 @@ public interface ProductsService {
 	public void deleteAllProducts();
 
 	Optional<Product> findProductById(int id);
-
-	void createProduct(Product product2);
 
 }

@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,77 +10,68 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.Productdao;
 import com.example.demo.model.Product;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-@Getter
-@Setter
+@Data
 @Slf4j
 @Service
 public class ProductServiceimpl implements ProductsService {
 
 	@Autowired
-	Productdao product;
+	Productdao productdao;
 	@Value("${spring.application.name}")
 	private String name;
 
 	@Value("${spring.application.id}")
 	private String propId;
 
-	public void createProduct(Product product2) {
+	public void createProduct(Product product) {
 		// TODO Auto-generated method stub
 		Integer id;
 		log.info("We are adding the properties id and user input id");
-		id = product2.getId() + Integer.parseInt(getPropId());
-		product2.setId(id);
-		product.save(product2);
+		id = product.getId() + Integer.parseInt(getPropId());
+		product.setId(id);
+		productdao.save(product);
 
 	}
 
 	@Override
 	public Collection<Product> getAllProducts() {
 		// TODO Auto-generated method stub
-		return product.findAll();
+		return productdao.findAll();
 	}
 
 	@Override
 	public Optional<Product> findProductById(int id) {
 		// TODO Auto-generated method stub
-		return product.findById(id);
+		return productdao.findById(id);
 	}
 
 	@Override
 	public void deleteProductById(int id) {
 		// TODO Auto-generated method stub
-		product.deleteById(id);
+		productdao.deleteById(id);
 
 	}
 
 	@Override
 	public void updateProduct(Product emp) {
 		// TODO Auto-generated method stub
-		product.save(emp);
+		productdao.save(emp);
 
 	}
 
 	@Override
 	public void deleteAllProducts() {
 		// TODO Auto-generated method stub
-		product.deleteAll();
+		productdao.deleteAll();
 
 	}
 
 	@Override
 	public Optional<Product> findEmployeeById(int id) {
 		// TODO Auto-generated method stub
-		return product.findById(id);
+		return productdao.findById(id);
 	}
-
-	@Override
-	public void createProduct(List<Product> emp) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

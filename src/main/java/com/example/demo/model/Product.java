@@ -7,14 +7,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Setter;
 
-@Getter
-@Setter
+
 
 // Mongo Database Annotation
+@Data
+@NoArgsConstructor
 @Document
 public class Product {
 	@org.springframework.data.annotation.Id
@@ -30,16 +31,13 @@ public class Product {
 	String size;
 
 	@NonNull
-	@JsonProperty("papappa")
+	@JsonProperty("othersize")
 	List<String> othersize;
 
 	@NonNull
-	Map<String, String> test;
-
-	@NonNull
-	Map<String, String> demo;
+	Map<String, Integer> Details;
 
 	// Embedded Object
-	Customer cus;
+	Manufacturer manufacturer;
 
 }

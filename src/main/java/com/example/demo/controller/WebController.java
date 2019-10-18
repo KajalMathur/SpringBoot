@@ -19,9 +19,6 @@ public class WebController {
 	// private ProductService // for the cache implementation
 	ProductServiceimpl ps;
 
-	@Autowired
-
-	// Tutorial Point
 	// get
 	@RequestMapping(value = "/products")
 
@@ -31,7 +28,6 @@ public class WebController {
 	}
 
 	// POST
-
 	@RequestMapping(value = "/products", method = RequestMethod.POST)
 	public ResponseEntity<Object> createProduct(@RequestBody Product product) {
 		ps.createProduct(product);
@@ -43,8 +39,6 @@ public class WebController {
 	public String updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
 		ps.updateProduct(product);
 		return "Product is updated successfully";
-		// return new ResponseEntity<>(ps.productServicePut(product, id),
-		// HttpStatus.OK);
 	}
 
 	// delete
@@ -53,6 +47,5 @@ public class WebController {
 
 		ps.deleteProductById(id);
 		return new ResponseEntity<>("Product is Deleted successfully", HttpStatus.OK);
-		// return new ResponseEntity<>(ps.productServiceDelete(id), HttpStatus.OK);
 	}
 }
