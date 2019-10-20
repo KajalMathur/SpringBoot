@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,20 +36,21 @@ public class ProductController {
 	}
 
 	@PostMapping("/products")
-	public String createProduct(@Valid @RequestBody Product product) {
+	public ResponseEntity<String> createProduct(@Valid @RequestBody Product product) {
 		productServiceImpl.createProduct(product);
-		return "Product is created successfully";
+		return new ResponseEntity<String>("Product is created successfully", HttpStatus.OK);
 	}
 
 	@PutMapping("/products/{id}")
-	public String updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
+	public ResponseEntity<String> updateProduct(@PathVariable int id, @RequestBody Product product) {
 		productServiceImpl.updateProduct(product);
-		return "Product is updated successfully";
+		return new ResponseEntity<String>("Product is updated successfully", HttpStatus.OK);
 	}
 
 	@DeleteMapping("/products/{id}")
-	public String delete(@PathVariable("id") int id) {
+	public ResponseEntity<String> delete(@PathVariable int id) {
 		productServiceImpl.deleteProductById(id);
-		return "Product is Deleted successfully";
+		return new ResponseEntity<String>("Product is Deleted successfully", HttpStatus.OK);
 	}
+
 }

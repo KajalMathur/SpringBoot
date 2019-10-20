@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.product.dao.ProductDao;
+import com.product.dao.ProductDaoImpl;
 import com.product.model.Product;
 
 import lombok.Data;
@@ -19,32 +19,32 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
-	private ProductDao productDao;
+	private ProductDaoImpl productDaoImpl;
 
 	@Value("${spring.application.id}")
 	private String propId;
 
-	public ProductServiceImpl(ProductDao productDao) {
-		this.productDao = productDao;
+	public ProductServiceImpl(ProductDaoImpl productDaoImpl) {
+		this.productDaoImpl = productDaoImpl;
 
 	}
 	public void createProduct(Product product) {
-		productDao.save(product);
+		productDaoImpl.save(product);
 	}
 
 	@Override
 	public List<Product> getAllProducts() {
-		return productDao.findAll();
+		return productDaoImpl.getAllProducts();
 	}
 
 	@Override
 	public Optional<Product> findProductById(int id) {
-		return productDao.findById(id);
+		return productDaoImpl.getProductById(id);
 	}
 
 	@Override
 	public void deleteProductById(int id) {
-		productDao.deleteById(id);
+		productDaoImpl.deleteProductById(id);
 	}
 
 	@Override
@@ -52,12 +52,12 @@ public class ProductServiceImpl implements ProductService {
 		log.info("We are adding the properties id and user input id");
 		int id = product.getId() + Integer.parseInt(getPropId());
 		product.setId(id);
-		productDao.save(product);
+		productDaoImpl.save(product);
 	}
 
 	@Override
 	public void deleteAllProducts() {
 		// TODO Auto-generated method stub
-		productDao.deleteAll();
+		productDaoImpl.deleteAllProducts();
 	}
 }
