@@ -13,46 +13,45 @@ import com.product.model.Product;
 @Repository
 public class ProductDaoImpl implements ProductDao {
 
-	private DefaultProductDao productDaoDefault;
+	private DefaultProductDao defaultProductDao;
+
+	private RestTemplate restTemplate;
 
 	@Autowired
-	RestTemplate restTemplate;
-
-	public ProductDaoImpl(DefaultProductDao productDaoDefault) {
-		this.productDaoDefault = productDaoDefault;
+	public ProductDaoImpl(DefaultProductDao defaultProductDao, RestTemplate restTemplate) {
+		this.defaultProductDao = defaultProductDao;
+		this.restTemplate = restTemplate;
 	}
 
 	@Override
 	public void save(Product product) {
 		// TODO Auto-generated method stub
-		productDaoDefault.save(product);
-
+		defaultProductDao.save(product);
 	}
 
 	@Override
 	public List<Product> getAllProducts() {
 		// TODO Auto-generated method stub
-		return productDaoDefault.findAll();
+		return defaultProductDao.findAll();
 	}
 
 	@Override
 	public void deleteProductById(int id) {
 		// TODO Auto-generated method stub
-		productDaoDefault.deleteById(id);
+		defaultProductDao.deleteById(id);
 
 	}
 
 	@Override
 	public void deleteAllProducts() {
 		// TODO Auto-generated method stub
-		productDaoDefault.deleteAll();
-
+		defaultProductDao.deleteAll();
 	}
 
 	@Override
 	public Optional<Product> getProductById(int id) {
 		// TODO Auto-generated method stub
-		Optional<Product> product = productDaoDefault.findById(id);
+		Optional<Product> product = defaultProductDao.findById(id);
 		return product;
 	}
 

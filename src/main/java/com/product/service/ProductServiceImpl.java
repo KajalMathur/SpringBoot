@@ -10,24 +10,24 @@ import org.springframework.stereotype.Service;
 import com.product.dao.ProductDaoImpl;
 import com.product.model.Product;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-@Data
 @Slf4j
 @Service
 public class ProductServiceImpl implements ProductService {
 
-	@Autowired
+
 	private ProductDaoImpl productDaoImpl;
 
 	@Value("${spring.application.id}")
 	private String propId;
 
+	@Autowired
 	public ProductServiceImpl(ProductDaoImpl productDaoImpl) {
 		this.productDaoImpl = productDaoImpl;
-
 	}
+
+	@Override
 	public void createProduct(Product product) {
 		productDaoImpl.save(product);
 	}
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void updateProduct(Product product) {
 		log.info("We are adding the properties id and user input id");
-		int id = product.getId() + Integer.parseInt(getPropId());
+		int id = product.getId() + Integer.parseInt(propId);
 		product.setId(id);
 		productDaoImpl.save(product);
 	}
