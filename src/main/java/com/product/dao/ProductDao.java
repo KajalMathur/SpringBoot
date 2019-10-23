@@ -7,6 +7,7 @@ import com.product.model.Product;
 
 public interface ProductDao {
 
+	
 	public void save(Product product);
 
 	public Optional<Product> getProductById(int id);
@@ -16,5 +17,6 @@ public interface ProductDao {
 	public void deleteProductById(int id);
 
 	public void deleteAllProducts();
-
+	
+	
 }
