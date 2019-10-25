@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-class CustomerProductExceptionController {
+class NotFoundExceptionController {
 
-	@ExceptionHandler(value = CustomerProductException.class)
-	public ResponseEntity<String> exception(CustomerProductException exception) {
+	@ExceptionHandler(value = NotFoundException.class)
+	public ResponseEntity<String> exception(NotFoundException exception) {
 		return new ResponseEntity<String>(exception.getMessage(), HttpStatus.NOT_FOUND);
 	}
 

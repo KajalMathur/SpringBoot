@@ -6,5 +6,5 @@ import com.product.model.CustomerProductResponse;
 
 public interface CustomerProductService {
 
-	public CustomerProductResponse getcustometerProductById(int productid , int customerid) throws MalformedURLException;
+	public CustomerProductResponse getcustometerProductById(int customerId, int productId) throws MalformedURLException;
 }

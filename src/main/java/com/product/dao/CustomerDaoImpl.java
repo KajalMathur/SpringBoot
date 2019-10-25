@@ -1,19 +1,20 @@
 package com.product.dao;
 
-import java.net.MalformedURLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-import com.product.exception.CustomerProductException;
-import com.product.model.CustomerResponse;
+import com.product.exception.NotFoundException;
+import com.product.model.Customer;
 
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
 
 	private RestTemplate restTemplate;
+
+	@Value("${spring.data.customerServiceGetUrl}")
+	private String customerServiceGetUrl;
 
 	@Autowired
 	CustomerDaoImpl(RestTemplate restTemplate) {
@@ -21,13 +22,12 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public ResponseEntity<CustomerResponse> getCustomerResponseById(int id) throws MalformedURLException {
+	public Customer getCustomerResponseById(int customerId) {
 		try {
-			ResponseEntity<CustomerResponse> response = restTemplate
-					.getForEntity("http://localhost:8080/api/customers/" + id, CustomerResponse.class);
+			Customer response = restTemplate.getForObject(customerServiceGetUrl + customerId, Customer.class);
 			return response;
 		} catch (Exception e) {
-			throw new CustomerProductException("Not exist , Type : Customer , id=" + id);
+			throw new NotFoundException("Customer Not Found , Type : Customer , id=" + customerId);
 		}
 	}
 

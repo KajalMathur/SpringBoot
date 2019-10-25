@@ -1,13 +1,9 @@
 package com.product.dao;
 
-import java.net.MalformedURLException;
-
-import org.springframework.http.ResponseEntity;
-
-import com.product.model.CustomerResponse;
+import com.product.model.Customer;
 
 public interface CustomerDao {
 
-	public ResponseEntity<CustomerResponse> getCustomerResponseById(int id) throws MalformedURLException;
+	public Customer getCustomerResponseById(int id);
 
 }
