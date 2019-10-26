@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@JsonPropertyOrder({"customer","product"})
+
+@JsonPropertyOrder({ "customer", "product" })
 public class CustomerProductResponse {
 
 	@JsonProperty("customer")
