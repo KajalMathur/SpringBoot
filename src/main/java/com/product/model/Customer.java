@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Customer {
 
-	public int custId;
+	public int id;
 
 	private String firstName;
 
