@@ -10,11 +10,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-// Mongo Database Annotation
 @Data
 @NoArgsConstructor
 @Document
 public class Product {
+
 	@Id
 	int id;
 

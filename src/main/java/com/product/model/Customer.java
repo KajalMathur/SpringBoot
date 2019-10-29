@@ -2,16 +2,15 @@ package com.product.model;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotBlank;
+import lombok.Data;
 
+@Data
 public class Customer {
 
-	private int id;
+	public int id;
 
-	@NotBlank
 	private String firstName;
 
-	@NotBlank
 	private String lastName;
 
 	private Date joiningDate;
@@ -19,4 +18,11 @@ public class Customer {
 	private Date expiryDate;
 
 	private Address address;
+
+	private Status status;
+
+	public enum Status {
+		NEW, EXPERIENCED, EXPIRED, INVALID;
+	}
+
 }
