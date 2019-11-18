@@ -1,5 +1,6 @@
 package com.product.service;
 
+import java.net.MalformedURLException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class CustomerProductServiceImpl implements CustomerProductService {
 	}
 
 	@Override
-	public CustomerProductResponse getcustometerProductById(int customerId, int productId) {
+	public CustomerProductResponse getcustometerProductById(int customerId, int productId) throws MalformedURLException {
 		// TODO Auto-generated method stub
 		Optional<Product> product = defaultProductDao.findById(productId);
 		Customer customer = customerDao.getCustomerResponseById(customerId);

@@ -23,8 +23,7 @@ public class CustomerProductController {
 	}
 
 	@GetMapping("/customer/{customerId}/product/{productId}")
-	public CustomerProductResponse getCustomerProduct(@PathVariable int customerId, @PathVariable int productId)
-			throws MalformedURLException {
+	public CustomerProductResponse getCustomerProduct(@PathVariable int customerId, @PathVariable int productId) throws MalformedURLException {
 		return customerProductService.getcustometerProductById(customerId, productId);
 	}
 

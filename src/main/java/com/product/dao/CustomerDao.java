@@ -6,4 +6,5 @@ public interface CustomerDao {
 
 	public Customer getCustomerResponseById(int id);
 
+
 }
