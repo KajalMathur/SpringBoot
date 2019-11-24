@@ -13,4 +13,9 @@ class ProductExceptionController {
 		return new ResponseEntity<String>(exception.getMessage(), HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(value = InvalidDataException.class)
+	public ResponseEntity<String> exception(InvalidDataException exception) {
+		return new ResponseEntity<String>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+
 }

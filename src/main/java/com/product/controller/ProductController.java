@@ -30,9 +30,9 @@ public class ProductController {
 		this.productService = productService;
 	}
 
-	@GetMapping("/products")
-	public List<Product> getProduct() {
-		return productService.getAllProducts();
+	@GetMapping("/products/{order}/{like}")
+	public List<Product> getProduct(@PathVariable String order, @PathVariable String like) {
+		return productService.getAllProducts(order, like);
 	}
 
 	@PostMapping("/products")

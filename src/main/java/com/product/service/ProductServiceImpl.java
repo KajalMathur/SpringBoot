@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.product.dao.ProductDao;
+import com.product.exception.InvalidDataException;
 import com.product.model.Product;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +33,14 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getAllProducts() {
-		return productDao.getAllProducts();
+	public List<Product> getAllProducts(String order, String like) {
+		if (order.equalsIgnoreCase("asc"))
+			return productDao.findProductByNameLikeOrderByNameAsc(like);
+		else if (order.equalsIgnoreCase("desc"))
+			return productDao.findProductByNameLikeOrderByNameDesc(like);
+		else
+			throw new InvalidDataException("Only asc and dsc are allowed for order");
+
 	}
 
 	@Override

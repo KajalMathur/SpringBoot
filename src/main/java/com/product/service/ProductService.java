@@ -7,8 +7,6 @@ import com.product.model.Product;
 
 public interface ProductService {
 
-	public List<Product> getAllProducts();
-
 	public void deleteProductById(int id);
 
 	public void updateProduct(Product emp);
@@ -18,4 +16,6 @@ public interface ProductService {
 	Optional<Product> findProductById(int id);
 
 	void createProduct(Product product);
+
+	List<Product> getAllProducts(String order, String like);
 }

@@ -52,4 +52,14 @@ public class ProductDaoImpl implements ProductDao {
 		return product;
 	}
 
+	@Override
+	public List<Product> findProductByNameLikeOrderByNameAsc(String like) {
+		return defaultProductDao.findByNameLikeOrderByNameAsc(like);
+	}
+
+	@Override
+	public List<Product> findProductByNameLikeOrderByNameDesc(String like) {
+		return defaultProductDao.findByNameLikeOrderByNameDesc(like);
+	}
+
 }
