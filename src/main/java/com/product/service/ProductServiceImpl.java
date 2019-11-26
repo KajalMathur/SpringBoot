@@ -37,11 +37,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getAllProducts(String order, String contain) {
+	public List<Product> getAllProducts(String order, String containName) {
 		if (order.equalsIgnoreCase((Order.ASC).toString()))
-			return productDao.findProductByNameLikeOrderByNameAsc(contain);
+			return productDao.findProductByNameLikeOrderByNameAsc(containName);
 		else if (order.equalsIgnoreCase((Order.DESC).toString()))
-			return productDao.findProductByNameLikeOrderByNameDesc(contain);
+			return productDao.findProductByNameLikeOrderByNameDesc(containName);
 		else
 			throw new InvalidDataException("Only asc and dsc are allowed for contain");
 	}

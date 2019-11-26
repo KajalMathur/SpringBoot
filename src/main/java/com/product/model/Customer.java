@@ -28,5 +28,4 @@ public class Customer {
 	public enum Status {
 		NEW, EXPERIENCED, EXPIRED, INVALID;
 	}
-
 }

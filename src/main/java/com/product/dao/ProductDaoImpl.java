@@ -50,12 +50,12 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Product> findProductByNameLikeOrderByNameAsc(String contain) {
-		return defaultProductDao.findByNameLikeOrderByNameAsc(contain);
+	public List<Product> findProductByNameLikeOrderByNameAsc(String containName) {
+		return defaultProductDao.findByNameLikeOrderByNameAsc(containName);
 	}
 
 	@Override
-	public List<Product> findProductByNameLikeOrderByNameDesc(String contain) {
-		return defaultProductDao.findByNameLikeOrderByNameDesc(contain);
+	public List<Product> findProductByNameLikeOrderByNameDesc(String containName) {
+		return defaultProductDao.findByNameLikeOrderByNameDesc(containName);
 	}
 }

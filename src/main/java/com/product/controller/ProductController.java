@@ -31,9 +31,8 @@ public class ProductController {
 	}
 
 	@GetMapping("/products")
-	public List<Product> getProduct(@RequestParam(name = "order") String order,
-			@RequestParam(name = "contain") String contain) {
-		return productService.getAllProducts(order, contain);
+	public List<Product> getProduct(@RequestParam(name = "order") String order,@RequestParam(name = "containName") String containName) {
+		return productService.getAllProducts(order, containName);
 	}
 
 	@PostMapping("/products")

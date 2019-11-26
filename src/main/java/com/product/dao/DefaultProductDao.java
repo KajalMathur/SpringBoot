@@ -8,8 +8,7 @@ import com.product.model.Product;
 
 public interface DefaultProductDao extends MongoRepository<Product, Integer> {
 
-	List<Product> findByNameLikeOrderByNameAsc(String like);
+	List<Product> findByNameLikeOrderByNameAsc(String containName);
 
-	List<Product> findByNameLikeOrderByNameDesc(String like);
-
+	List<Product> findByNameLikeOrderByNameDesc(String containName);
 }

@@ -34,5 +34,4 @@ public class CustomerDaoImpl implements CustomerDao {
 			throw new NotFoundException("Customer Not Found , Type : Customer , id=" + customerId);
 		}
 	}
-
 }
