@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 @JsonPropertyOrder({ "customer", "product" })
 public class CustomerProductResponse {
 

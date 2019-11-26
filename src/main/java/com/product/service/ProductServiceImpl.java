@@ -17,6 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+	enum Order {
+		ASC, DESC
+	}
+
 	private ProductDao productDao;
 
 	@Value("${spring.application.id}")
@@ -33,14 +37,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getAllProducts(String order, String like) {
-		if (order.equalsIgnoreCase("asc"))
-			return productDao.findProductByNameLikeOrderByNameAsc(like);
-		else if (order.equalsIgnoreCase("desc"))
-			return productDao.findProductByNameLikeOrderByNameDesc(like);
+	public List<Product> getAllProducts(String order, String contain) {
+		if (order.equalsIgnoreCase((Order.ASC).toString()))
+			return productDao.findProductByNameLikeOrderByNameAsc(contain);
+		else if (order.equalsIgnoreCase((Order.DESC).toString()))
+			return productDao.findProductByNameLikeOrderByNameDesc(contain);
 		else
-			throw new InvalidDataException("Only asc and dsc are allowed for order");
-
+			throw new InvalidDataException("Only asc and dsc are allowed for contain");
 	}
 
 	@Override
@@ -63,7 +66,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void deleteAllProducts() {
-		// TODO Auto-generated method stub
 		productDao.deleteAllProducts();
 	}
 }

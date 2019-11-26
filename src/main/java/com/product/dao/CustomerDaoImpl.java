@@ -8,6 +8,9 @@ import org.springframework.web.client.RestTemplate;
 import com.product.exception.NotFoundException;
 import com.product.model.Customer;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
 
@@ -24,6 +27,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public Customer getCustomerResponseById(int customerId) {
 		try {
+			log.info("customerServiceGetUrl=" + customerServiceGetUrl + customerId);
 			Customer response = restTemplate.getForObject(customerServiceGetUrl + customerId, Customer.class);
 			return response;
 		} catch (Exception e) {
