@@ -18,10 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-//	enum Order1 {
-//		ASC, DESC
-//	}
-
 	private ProductDao productDao;
 
 	@Value("${spring.application.id}")
