@@ -12,9 +12,6 @@ import com.product.model.Customer;
 import com.product.model.CustomerProductResponse;
 import com.product.model.Product;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class CustomerProductServiceImpl implements CustomerProductService {
 
@@ -30,7 +27,6 @@ public class CustomerProductServiceImpl implements CustomerProductService {
 
 	@Override
 	public CustomerProductResponse getcustometerProductById(int customerId, int productId) {
-		// TODO Auto-generated method stub
 		Optional<Product> product = defaultProductDao.findById(productId);
 		Customer customer = customerDao.getCustomerResponseById(customerId);
 		if (product.isPresent()) {
@@ -39,7 +35,5 @@ public class CustomerProductServiceImpl implements CustomerProductService {
 			return customerProductResponse;
 		} else
 			throw new NotFoundException("Product Not Found , Type : Product , Id =" + productId);
-
 	}
-
 }

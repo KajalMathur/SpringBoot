@@ -21,8 +21,11 @@ public class Customer {
 
 	private Status status;
 
+	private String userName;
+
+	private String password;
+
 	public enum Status {
 		NEW, EXPERIENCED, EXPIRED, INVALID;
 	}
-
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.product.model.Order;
 import com.product.model.Product;
 import com.product.service.ProductService;
 
@@ -31,25 +32,25 @@ public class ProductController {
 	}
 
 	@GetMapping("/products")
-	public List<Product> getProduct() {
-		return productService.getAllProducts();
+	public List<Product> getProduct(@RequestParam Order order,@RequestParam String containName) {
+		return productService.getAllProducts(order, containName);
 	}
 
 	@PostMapping("/products")
 	public ResponseEntity<String> createProduct(@Valid @RequestBody Product product) {
 		productService.createProduct(product);
-		return new ResponseEntity<String>("Product is created successfully", HttpStatus.OK);
+		return ResponseEntity.ok().body("Product is created successfully");
 	}
 
 	@PutMapping("/products/{id}")
 	public ResponseEntity<String> updateProduct(@PathVariable int id, @RequestBody Product product) {
 		productService.updateProduct(product);
-		return new ResponseEntity<String>("Product is updated successfully", HttpStatus.OK);
+		return ResponseEntity.ok().body("Product is updated successfully");
 	}
 
 	@DeleteMapping("/products/{id}")
 	public ResponseEntity<String> delete(@PathVariable int id) {
 		productService.deleteProductById(id);
-		return new ResponseEntity<String>("Product is Deleted successfully", HttpStatus.OK);
+		return ResponseEntity.ok().body("Product is Deleted successfully");
 	}
 }

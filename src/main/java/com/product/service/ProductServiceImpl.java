@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.product.dao.ProductDao;
+import com.product.exception.InvalidDataException;
+import com.product.model.Order;
 import com.product.model.Product;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +34,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getAllProducts() {
-		return productDao.getAllProducts();
+	public List<Product> getAllProducts(Order order, String containName) {
+		if (order==Order.ASC)
+			return productDao.findProductByNameLikeOrderByNameAsc(containName);
+		else if (order==Order.DESC)
+			return productDao.findProductByNameLikeOrderByNameDesc(containName);
+		else
+			throw new InvalidDataException("Only asc and desc are allowed for contain");
 	}
 
 	@Override
@@ -56,7 +63,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void deleteAllProducts() {
-		// TODO Auto-generated method stub
 		productDao.deleteAllProducts();
 	}
 }

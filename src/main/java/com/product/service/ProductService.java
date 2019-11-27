@@ -3,11 +3,10 @@ package com.product.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.product.model.Order;
 import com.product.model.Product;
 
 public interface ProductService {
-
-	public List<Product> getAllProducts();
 
 	public void deleteProductById(int id);
 
@@ -18,4 +17,6 @@ public interface ProductService {
 	Optional<Product> findProductById(int id);
 
 	void createProduct(Product product);
+
+	public List<Product> getAllProducts(Order order, String containName);
 }

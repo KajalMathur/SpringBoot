@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.product.model.Product;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class ProductDaoImpl implements ProductDao {
 
@@ -52,4 +49,13 @@ public class ProductDaoImpl implements ProductDao {
 		return product;
 	}
 
+	@Override
+	public List<Product> findProductByNameLikeOrderByNameAsc(String containName) {
+		return defaultProductDao.findByNameLikeOrderByNameAsc(containName);
+	}
+
+	@Override
+	public List<Product> findProductByNameLikeOrderByNameDesc(String containName) {
+		return defaultProductDao.findByNameLikeOrderByNameDesc(containName);
+	}
 }

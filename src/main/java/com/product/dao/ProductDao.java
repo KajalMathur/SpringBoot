@@ -17,4 +17,7 @@ public interface ProductDao {
 
 	public void deleteAllProducts();
 
+	public List<Product> findProductByNameLikeOrderByNameDesc(String containName);
+
+	public List<Product> findProductByNameLikeOrderByNameAsc(String containName);
 }
