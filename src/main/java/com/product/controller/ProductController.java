@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.product.model.Order;
 import com.product.model.Product;
 import com.product.service.ProductService;
 
@@ -31,7 +32,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/products")
-	public List<Product> getProduct(@RequestParam(name = "order") String order,@RequestParam(name = "containName") String containName) {
+	public List<Product> getProduct(@RequestParam Order order,@RequestParam String containName) {
 		return productService.getAllProducts(order, containName);
 	}
 

@@ -27,5 +27,4 @@ public class CustomerProductController {
 			throws MalformedURLException {
 		return customerProductService.getcustometerProductById(customerId, productId);
 	}
-
 }

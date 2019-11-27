@@ -3,6 +3,7 @@ package com.product.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.product.model.Order;
 import com.product.model.Product;
 
 public interface ProductService {
@@ -17,5 +18,5 @@ public interface ProductService {
 
 	void createProduct(Product product);
 
-	List<Product> getAllProducts(String order, String like);
+	public List<Product> getAllProducts(Order order, String containName);
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.product.dao.ProductDao;
 import com.product.exception.InvalidDataException;
+import com.product.model.Order;
 import com.product.model.Product;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-	enum Order {
-		ASC, DESC
-	}
+//	enum Order1 {
+//		ASC, DESC
+//	}
 
 	private ProductDao productDao;
 
@@ -37,13 +38,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getAllProducts(String order, String containName) {
-		if (order.equalsIgnoreCase((Order.ASC).toString()))
+	public List<Product> getAllProducts(Order order, String containName) {
+		if (order==Order.ASC)
 			return productDao.findProductByNameLikeOrderByNameAsc(containName);
-		else if (order.equalsIgnoreCase((Order.DESC).toString()))
+		else if (order==Order.DESC)
 			return productDao.findProductByNameLikeOrderByNameDesc(containName);
 		else
-			throw new InvalidDataException("Only asc and dsc are allowed for contain");
+			throw new InvalidDataException("Only asc and desc are allowed for contain");
 	}
 
 	@Override
