@@ -2,6 +2,8 @@ package com.product.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,9 +17,15 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomerDaoImpl implements CustomerDao {
 
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private LoadBalancerClient loadBalancer;
 
-	@Value("${spring.data.customerServiceGetUrl}")
-	private String customerServiceGetUrl;
+	@Value("${spring.data.zuulservice}")
+	private String zuulServiceName;
+	
+	@Value("${spring.url.customerService}")
+	private String customerServicePath;
 
 	@Autowired
 	CustomerDaoImpl(RestTemplate restTemplate) {
@@ -27,8 +35,8 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public Customer getCustomerResponseById(int customerId) {
 		try {
-			log.info("customerServiceGetUrl=" + customerServiceGetUrl + customerId);
-			Customer response = restTemplate.getForObject(customerServiceGetUrl + customerId, Customer.class);
+			ServiceInstance serviceInstance = loadBalancer.choose(zuulServiceName);
+			Customer response = restTemplate.getForObject(serviceInstance.getUri().toString() + customerServicePath + customerId , Customer.class);
 			return response;
 		} catch (Exception e) {
 			throw new NotFoundException("Customer Not Found , Type : Customer , id=" + customerId);
