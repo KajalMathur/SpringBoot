@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.product.model.CustomerProductResponse;
 import com.product.service.CustomerProductService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class CustomerProductController {
@@ -25,6 +28,8 @@ public class CustomerProductController {
 	@GetMapping("/customer/{customerId}/product/{productId}")
 	public CustomerProductResponse getCustomerProduct(@PathVariable int customerId, @PathVariable int productId)
 			throws MalformedURLException {
-		return customerProductService.getcustometerProductById(customerId, productId);
+		CustomerProductResponse res = customerProductService.getcustometerProductById(customerId, productId);
+		log.info("CUSTOMER Product log=====" + res );
+		return res;
 	}
 }

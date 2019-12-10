@@ -36,7 +36,11 @@ public class CustomerDaoImpl implements CustomerDao {
 	public Customer getCustomerResponseById(int customerId) {
 		try {
 			ServiceInstance serviceInstance = loadBalancer.choose(zuulServiceName);
-			Customer response = restTemplate.getForObject(serviceInstance.getUri().toString() + customerServicePath + customerId , Customer.class);
+			log.info("Zuul Service Name ="+zuulServiceName);
+			log.info(" REST TEMPLATE URL = http://localhost:8095/api/customer/4");
+		//	Customer response = restTemplate.getForObject(serviceInstance.getUri().toString() + customerServicePath + customerId , Customer.class);
+			Customer response = restTemplate.getForObject("http://localhost:8095/api/customer/4",Customer.class);
+			log.info("respnseeeeeeeeeee"+response);
 			return response;
 		} catch (Exception e) {
 			throw new NotFoundException("Customer Not Found , Type : Customer , id=" + customerId);
