@@ -22,6 +22,10 @@ public class ProductDaoImpl implements ProductDao {
 		this.defaultProductDao = defaultProductDao;
 	}
 
+	public ProductDaoImpl() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void save(Product product) {
 		defaultProductDao.save(product);

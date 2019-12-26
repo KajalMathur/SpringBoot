@@ -12,10 +12,14 @@ import com.product.exception.InvalidDataException;
 import com.product.model.Order;
 import com.product.model.Product;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
 	private ProductDao productDao;
@@ -49,20 +53,22 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void deleteProductById(int id) {
+	public void deleteProductbyId(int id) {
 		productDao.deleteProductById(id);
 	}
 
 	@Override
 	public void updateProduct(Product product) {
 		log.info("We are adding the properties id and user input id");
+		if(propId !=null) {
 		int id = product.getId() + Integer.parseInt(propId);
 		product.setId(id);
+		}
 		productDao.save(product);
 	}
 
 	@Override
-	public void deleteAllProducts() {
+	public void deleteallProducts() {
 		productDao.deleteAllProducts();
 	}
 }
