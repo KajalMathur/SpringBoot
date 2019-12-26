@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.product.model.Product;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Service
 public class ProductDaoImpl implements ProductDao {
 
@@ -20,10 +25,6 @@ public class ProductDaoImpl implements ProductDao {
 	@Autowired
 	public ProductDaoImpl(DefaultProductDao defaultProductDao) {
 		this.defaultProductDao = defaultProductDao;
-	}
-
-	public ProductDaoImpl() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
