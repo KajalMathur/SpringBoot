@@ -34,77 +34,93 @@ import com.product.service.CustomerProductServiceImpl;
 public class CustomerProductServiceApplicationTest {
 
 	@Mock
-	private CustomerDao customerDao ;
-	
+	private CustomerDao customerDao;
+
 	@Mock
 	private DefaultProductDao defaultProductDao;
-	
+
 	@InjectMocks
-	private CustomerProductServiceImpl customerProductServiceImpl ;
-	
-	
+	private CustomerProductServiceImpl customerProductServiceImpl;
+
 	private Product product;
 	private Customer customer;
-	
+
 	@Before
 	public void preRequisiteDataCreation() {
-		
+
 		/* Product data creation */
 		List<String> othersize = new ArrayList<String>();
-		ImmutableMap<String , Integer> details = ImmutableMap.of(
-				"quantity", 1 ,
-				"sold", 2 );
+		ImmutableMap<String, Integer> details = ImmutableMap.of("quantity",1,"sold",2);
 		othersize.add("Rick");
 		othersize.add("Ron");
 		othersize.add("Victor");
-		Manufacturer manufacturer = Manufacturer.builder().manufactureId(100).manufactureName("ProductManu..").tinNo(1234).build();
-		 product = Product.builder().name("Sita").id(1).size("12").color("Pink").othersize(othersize).Details(details).manufacturer(manufacturer).build();
-		
-		 /* Customer Data creation */
-		 Date date = java.util.Calendar.getInstance().getTime();
-			Calendar c = Calendar.getInstance();
-			c.setTime(date);
-			c.add(Calendar.YEAR, 2);
-			Date expiryDate = c.getTime();
-			Address address = Address.builder().streetName("Abc1").state("Haryana").country("India").build();
-			customer = Customer.builder().firstName("Ram").lastName("shaerma").joiningDate(date).expiryDate(expiryDate)
-					.address(address).build();
-			}
-	
+		Manufacturer manufacturer = Manufacturer.builder()
+				.manufactureId(100)
+				.manufactureName("ProductManu..")
+				.tinNo(1234)
+				.build();
+		product = Product.builder()
+				.name("Sita")
+				.id(1)
+				.size("12")
+				.color("Pink")
+				.othersize(othersize)
+				.Details(details)
+				.manufacturer(manufacturer)
+				.build();
+
+		/* Customer Data creation */
+		Date date = java.util.Calendar.getInstance().getTime();
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.YEAR, 2);
+		Date expiryDate = c.getTime();
+		Address address = Address.builder()
+				.streetName("Abc1")
+				.state("Haryana")
+				.country("India")
+				.build();
+		customer = Customer.builder()
+				.firstName("Ram")
+				.lastName("shaerma")
+				.joiningDate(date)
+				.expiryDate(expiryDate)
+				.address(address).build();
+	}
+
 	@Test
 	public void verifyFindCustomerProductById() {
-		
+
 		/* Given */
 		when(defaultProductDao.findById(1)).thenReturn(Optional.of(product));
 		when(customerDao.getCustomerResponseById(1)).thenReturn(customer);
-		
+
 		/* When */
-		CustomerProductResponse customerProductResponse = customerProductServiceImpl.getcustometerProductById(1, 1);
-		
+		CustomerProductResponse customerProductResponse = customerProductServiceImpl.getcustometerProductById(1,1);
+
 		/* Then */
-		Assert.assertEquals(customerProductResponse.getProduct().getId(), 1);
-		Assert.assertEquals(customerProductResponse.getCustomerResponse().getFirstName(), "Ram");
-		}
-	
+		Assert.assertEquals(customerProductResponse.getProduct().getId(),1);
+		Assert.assertEquals(customerProductResponse.getCustomerResponse().getFirstName(),"Ram");
+	}
+
 	@Test
 	public void verifyFindCustomerProductResponseIfProductNotPresent() {
-		
+
 		boolean thrown = false;
-		
+
 		/* Given */
 		when(defaultProductDao.findById(1)).thenReturn(Optional.empty());
 		when(customerDao.getCustomerResponseById(1)).thenReturn(customer);
-		
+
 		/* When */
 		try {
-			 customerProductServiceImpl.getcustometerProductById(1,0);
-		}
-		catch(NotFoundException ex) {
-			thrown = true ;
+			customerProductServiceImpl.getcustometerProductById(1,0);
+		} catch (NotFoundException ex) {
+			thrown = true;
 			assertEquals(ex.getMessage(), "Product Not Found , Type : Product , Id =0");
-			}
-		
-		/* Then */
-		Assert.assertEquals(true, thrown);
 		}
+
+		/* Then */
+		Assert.assertEquals(true,thrown);
+	}
 }

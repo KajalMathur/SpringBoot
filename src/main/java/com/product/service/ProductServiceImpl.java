@@ -61,8 +61,8 @@ public class ProductServiceImpl implements ProductService {
 	public void updateProduct(Product product) {
 		log.info("We are adding the properties id and user input id");
 		if(propId !=null) {
-		int id = product.getId() + Integer.parseInt(propId);
-		product.setId(id);
+			int id = product.getId() + Integer.parseInt(propId);
+			product.setId(id);
 		}
 		productDao.save(product);
 	}
