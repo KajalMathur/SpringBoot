@@ -8,7 +8,7 @@ import com.product.model.Product;
 
 public interface ProductService {
 
-	public void deleteProductById(int id);
+	public void deleteProductbyId(int id);
 
 	public void updateProduct(Product emp);
 

@@ -49,15 +49,17 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void deleteProductById(int id) {
+	public void deleteProductbyId(int id) {
 		productDao.deleteProductById(id);
 	}
 
 	@Override
 	public void updateProduct(Product product) {
 		log.info("We are adding the properties id and user input id");
-		int id = product.getId() + Integer.parseInt(propId);
-		product.setId(id);
+		if(propId != null) {
+			int id = product.getId() + Integer.parseInt(propId);
+			product.setId(id);
+		}
 		productDao.save(product);
 	}
 
