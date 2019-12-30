@@ -3,11 +3,12 @@ package com.product.productService;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.product.dao.ProductDao;
+import com.google.common.collect.ImmutableList;
 import com.product.dao.ProductDaoImpl;
 import com.product.model.Manufacturer;
 import com.product.model.Order;
@@ -28,10 +29,7 @@ import com.product.service.ProductServiceImpl;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductServiceApplicationTest {
-
-	@Mock
-	private ProductDao productDao;
-
+	
 	@Mock
 	private ProductDaoImpl productDaoImpl;
 
@@ -39,20 +37,17 @@ public class ProductServiceApplicationTest {
 	private ProductServiceImpl productServiceImpl;
 
 	private List<Product> productList;
-	private Product product1;
-	private Product product2;
+	private  Product product1;
+	private  Product product2;
 
 	@Before
 	public void preRequisiteDataCreation() {
 
 		/* Data Creation */
-		List<String> othersize = new ArrayList<String>();
-		Map<String, Integer> details = new HashMap<String, Integer>();
-		details.put("quantity",1);
-		details.put("sold",2);
-		othersize.add("Rick");
-		othersize.add("Ron");
-		othersize.add("Victor");
+		ImmutableList<String> othersize = ImmutableList.of("Rick", "Ron", "Victor");
+		Map<String, Integer> details = new LinkedHashMap<String, Integer>();
+		details.put("quantity", 1);
+		details.put("sold", 2);
 		Manufacturer manufacturer = Manufacturer.builder()
 				.manufactureId(100)
 				.manufactureName("ProductManu..")
@@ -67,7 +62,7 @@ public class ProductServiceApplicationTest {
 				.build();
 		product2 = Product.builder()
 				.name("Sapna")
-				.id(1)
+				.id(2)
 				.size("12")
 				.color("Pink")
 				.othersize(othersize)
@@ -79,14 +74,14 @@ public class ProductServiceApplicationTest {
 	@Test
 	public void getAllProductAscTest() {
 
-		/* Given */
-		List<Product> productList = new ArrayList<Product>();
+		/* Given */ 
+		productList = new ArrayList<Product>();
 		productList.add(product1);
 		productList.add(product2);
 		when(productDaoImpl.findProductByNameLikeOrderByNameAsc("S")).thenReturn(productList);
 
 		/* When */
-		List<Product> productNewList = productServiceImpl.getAllProducts(Order.ASC,"S");
+		List<Product> productNewList = productServiceImpl.getAllProducts(Order.ASC, "S");
 
 		/* Then */
 		Assert.assertEquals(productNewList, productList);
@@ -96,13 +91,13 @@ public class ProductServiceApplicationTest {
 	public void getAllProductDescTest() {
 
 		/* Given */
-		List<Product> productList = new ArrayList<Product>();
+	    productList = new ArrayList<Product>();
 		productList.add(product2);
 		productList.add(product1);
 		when(productDaoImpl.findProductByNameLikeOrderByNameDesc("S")).thenReturn(productList);
 
 		/* When */
-		List<Product> productNewList = productServiceImpl.getAllProducts(Order.DESC,"S");
+		List<Product> productNewList = productServiceImpl.getAllProducts(Order.DESC, "S");
 
 		/* Then */
 		Assert.assertEquals(productNewList, productList);
@@ -118,7 +113,7 @@ public class ProductServiceApplicationTest {
 		Optional<Product> product = productDaoImpl.getProductById(1);
 
 		/* Then */
-		Assert.assertEquals(Optional.of(product1).get(),product.get());
+		Assert.assertEquals(product1, product.get());
 	}
 
 	@Test
@@ -131,7 +126,7 @@ public class ProductServiceApplicationTest {
 		Optional<Product> product = productDaoImpl.getProductById(1);
 
 		/* Then */
-		Assert.assertEquals(Optional.empty(),product);
+		Assert.assertEquals(Optional.empty(), product);
 	}
 
 	@Test
@@ -141,7 +136,7 @@ public class ProductServiceApplicationTest {
 		productServiceImpl.deleteallProducts();
 
 		/* Then */
-		Mockito.verify(productDao).deleteAllProducts();
+		Mockito.verify(productDaoImpl).deleteAllProducts();
 	}
 
 	@Test
@@ -151,7 +146,7 @@ public class ProductServiceApplicationTest {
 		productServiceImpl.deleteProductbyId(1);
 
 		/* Then */
-		Mockito.verify(productDao).deleteProductById(1);
+		Mockito.verify(productDaoImpl).deleteProductById(1);
 	}
 
 	@Test
@@ -161,7 +156,7 @@ public class ProductServiceApplicationTest {
 		productServiceImpl.createProduct(product1);
 
 		/* Then */
-		Mockito.verify(productDao, Mockito.atLeastOnce()).save(product1);
+		Mockito.verify(productDaoImpl).save(product1);
 	}
 
 	@Test
@@ -171,6 +166,11 @@ public class ProductServiceApplicationTest {
 		productServiceImpl.updateProduct(product1);
 
 		/* Then */
-		Assert.assertEquals(product1.getId(),1);
+		Mockito.verify(productDaoImpl).save(product1);
 	}
+	
+	@After
+	public void clear() {
+		Mockito.reset(productDaoImpl);
+	} 
 }

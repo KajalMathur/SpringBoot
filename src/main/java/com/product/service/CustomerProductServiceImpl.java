@@ -26,7 +26,7 @@ public class CustomerProductServiceImpl implements CustomerProductService {
 	}
 
 	@Override
-	public CustomerProductResponse getcustometerProductById(int customerId, int productId) {
+	public CustomerProductResponse getcustomerProductById(int customerId, int productId) {
 		Optional<Product> product = defaultProductDao.findById(productId);
 		Customer customer = customerDao.getCustomerResponseById(customerId);
 		if (product.isPresent()) {

@@ -18,6 +18,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.product.dao.CustomerDao;
 import com.product.dao.DefaultProductDao;
@@ -49,11 +50,8 @@ public class CustomerProductServiceApplicationTest {
 	public void preRequisiteDataCreation() {
 
 		/* Product data creation */
-		List<String> othersize = new ArrayList<String>();
-		ImmutableMap<String, Integer> details = ImmutableMap.of("quantity",1,"sold",2);
-		othersize.add("Rick");
-		othersize.add("Ron");
-		othersize.add("Victor");
+		ImmutableList<String> othersize = ImmutableList.of("Rick", "Ron", "Victor");
+		ImmutableMap<String, Integer> details = ImmutableMap.of("quantity",1, "sold",2);
 		Manufacturer manufacturer = Manufacturer.builder()
 				.manufactureId(100)
 				.manufactureName("ProductManu..")
@@ -96,11 +94,11 @@ public class CustomerProductServiceApplicationTest {
 		when(customerDao.getCustomerResponseById(1)).thenReturn(customer);
 
 		/* When */
-		CustomerProductResponse customerProductResponse = customerProductServiceImpl.getcustometerProductById(1,1);
+		CustomerProductResponse customerProductResponse = customerProductServiceImpl.getcustomerProductById(1, 1);
 
 		/* Then */
-		Assert.assertEquals(customerProductResponse.getProduct().getId(),1);
-		Assert.assertEquals(customerProductResponse.getCustomerResponse().getFirstName(),"Ram");
+		Assert.assertEquals(customerProductResponse.getProduct().getId(), 1);
+		Assert.assertEquals(customerProductResponse.getCustomerResponse().getFirstName(), "Ram");
 	}
 
 	@Test
@@ -109,18 +107,39 @@ public class CustomerProductServiceApplicationTest {
 		boolean thrown = false;
 
 		/* Given */
-		when(defaultProductDao.findById(1)).thenReturn(Optional.empty());
+		when(defaultProductDao.findById(0)).thenReturn(Optional.empty());
 		when(customerDao.getCustomerResponseById(1)).thenReturn(customer);
 
 		/* When */
 		try {
-			customerProductServiceImpl.getcustometerProductById(1,0);
+			customerProductServiceImpl.getcustomerProductById(1, 0);
 		} catch (NotFoundException ex) {
 			thrown = true;
 			assertEquals(ex.getMessage(), "Product Not Found , Type : Product , Id =0");
 		}
 
 		/* Then */
-		Assert.assertEquals(true,thrown);
+		Assert.assertEquals(true, thrown);
+	}
+	
+	@Test
+	public void verifyFindCustomerProductResponseIfCustomerNotPresent() {
+
+		boolean thrown = false;
+
+		/* Given */
+		when(defaultProductDao.findById(1)).thenReturn(Optional.of(product));
+		when(customerDao.getCustomerResponseById(2)).thenThrow(new NotFoundException("Customer Not Found , Type : Customer , id=2"));
+
+		/* When */
+		try {
+			customerProductServiceImpl.getcustomerProductById(2, 1);
+		} catch (NotFoundException ex) {
+			thrown = true;
+			assertEquals(ex.getMessage(), "Customer Not Found , Type : Customer , id=2");
+		}
+
+		/* Then */
+		Assert.assertEquals(true, thrown);
 	}
 }

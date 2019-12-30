@@ -18,8 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
 	private ProductDao productDao;
@@ -60,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void updateProduct(Product product) {
 		log.info("We are adding the properties id and user input id");
-		if(propId !=null) {
+		if(propId != null) {
 			int id = product.getId() + Integer.parseInt(propId);
 			product.setId(id);
 		}

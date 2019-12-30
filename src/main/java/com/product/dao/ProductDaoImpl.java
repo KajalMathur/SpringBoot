@@ -12,8 +12,6 @@ import com.product.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Service
 public class ProductDaoImpl implements ProductDao {
 
