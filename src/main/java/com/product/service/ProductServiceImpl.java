@@ -12,8 +12,6 @@ import com.product.exception.InvalidDataException;
 import com.product.model.Order;
 import com.product.model.Product;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -66,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void deleteallProducts() {
+	public void deleteAllProducts() {
 		productDao.deleteAllProducts();
 	}
 }

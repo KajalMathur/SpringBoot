@@ -133,7 +133,7 @@ public class ProductServiceApplicationTest {
 	public void deleteAllProduct() {
 
 		/* When */
-		productServiceImpl.deleteallProducts();
+		productServiceImpl.deleteAllProducts();
 
 		/* Then */
 		Mockito.verify(productDaoImpl).deleteAllProducts();

@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.product.model.Product;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 @Service
 public class ProductDaoImpl implements ProductDao {
 

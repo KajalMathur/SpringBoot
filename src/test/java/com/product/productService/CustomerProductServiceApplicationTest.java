@@ -142,4 +142,25 @@ public class CustomerProductServiceApplicationTest {
 		/* Then */
 		Assert.assertEquals(true, thrown);
 	}
+	
+	@Test
+	public void verifyFindCustomerProductResponseIfCustomerProduct() {
+
+		boolean thrown = false;
+
+		/* Given */
+		when(defaultProductDao.findById(0)).thenThrow(new NotFoundException("Product Not Found , Type : Product , Id =0"));
+		when(customerDao.getCustomerResponseById(2)).thenThrow(new NotFoundException("Customer Not Found , Type : Customer , id=2"));
+
+		/* When */
+		try {
+			customerProductServiceImpl.getcustomerProductById(2, 0);
+		} catch (NotFoundException ex) {
+			thrown = true;
+			assertEquals(ex.getMessage(), "Product Not Found , Type : Product , Id =0");
+		}
+
+		/* Then */
+		Assert.assertEquals(true, thrown);
+	}
 }

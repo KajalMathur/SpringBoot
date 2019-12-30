@@ -12,7 +12,7 @@ public interface ProductService {
 
 	public void updateProduct(Product emp);
 
-	public void deleteallProducts();
+	public void deleteAllProducts();
 
 	Optional<Product> findProductById(int id);
 
