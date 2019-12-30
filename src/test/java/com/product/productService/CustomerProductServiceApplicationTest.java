@@ -51,7 +51,7 @@ public class CustomerProductServiceApplicationTest {
 
 		/* Product data creation */
 		ImmutableList<String> othersize = ImmutableList.of("Rick", "Ron", "Victor");
-		ImmutableMap<String, Integer> details = ImmutableMap.of("quantity",1, "sold",2);
+		ImmutableMap<String, Integer> details = ImmutableMap.of("quantity", 1, "sold",2);
 		Manufacturer manufacturer = Manufacturer.builder()
 				.manufactureId(100)
 				.manufactureName("ProductManu..")
